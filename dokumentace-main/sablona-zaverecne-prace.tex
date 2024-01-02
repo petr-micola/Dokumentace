@@ -515,7 +515,6 @@ Adresář projektu po první konfiguraci bude obsahovat tyto soubory:
 	\item manage.py – Script, který má na starosti správu projektu.
 	\item settings.py – Konfigurační script společný všem aplikacím v projektu.
 	\item urls.py – Globální konfigurace URL.
-	\item \_\_init\_\_.py – Adresář projektu je díky tomuto souboru také balíčkem Pythonu.
 \end{itemize}
 \subsection{Soubory aplikace}
 Vytvoření struktury nové aplikace proběhne po spuštění příkazu python manage.py startapp (název aplikace). Po spuštění tohoto scriptu se vytvoří podadresář se strukturou:
@@ -524,7 +523,6 @@ Vytvoření struktury nové aplikace proběhne po spuštění příkazu python m
 	\item urls.py – Obsahuje mapování URL na jednotlivá view.
 	\item models.py – Obsahuje popis datového modelu aplikace.
 	\item tests.py – Obsahuje jednotkové testy.
-	\item \_\_init\_\_.py – Dělá z aplikace balíček Pythonu.
 \end{itemize}
 
 \chapter{Využité technologie}
@@ -598,6 +596,21 @@ Soft UI Dashboard je šablona administrace vytvořená pomocí Bootstrap 5.
 	\end{figure}
 
 \chapter{Způsoby řešení, použité postupy}
+Při hledání vhodné technologie pro tuto aplikaci jsem narazil na Django. Tento webový aplikační framework je v problematice autentizace často využíván. S Djangem jsem navíc pracovali ve škole, tak jsem se rozhodl mích znalostí využít a Django použít.
+
+\section{Vytvoření projektu}
+\label{sec:vytvoreniprojektu}
+Prvním krokem bylo vytvoření projektu. Stačilo nainstalovat Python a framework Django. Příkazem se poté vytvořila základní struktura.
+
+\section{Autentizace Django-allauth}
+\label{sec:autentizacedjango-allauth}
+Dále bylo mým úkolem umožnit uživatelům registraci a přihlášení pomocí aplikací třetích stran (GitHub a Microsoft). Pro tuto funkci jsem zvolil balíček django-allauth, který proces vytváření autentizace značně urychlil a autentizaci zabezpečil.
+
+\subsection{Aplikace třetích stran}
+Balíček django-allauth bylo potřeba nainstalovat. Poté jsem musel udělat pár změn v settings.py. Pro funkčnost přihlášení aplikací třetích stran jsem musel tyto aplikace přidat do struktury SOCIALACCOUNT\_PROVIDERS. K tomu jsem potřeboval klíče těchto poskytovatelů, ty jsem získal zaregistrováním a nastavením aplikací OAuth.
+
+\subsection{Kontrola funkčnosti}
+Pro kontrolu funkčnosti jsem django-allauth musel přidat do cest urls.py a vytvořit jednoduchý pohled ve views.py, který vracel šablonu základní stránky.
 
 \chapter{Výsledky řešení, uživatelský manuál}
 
