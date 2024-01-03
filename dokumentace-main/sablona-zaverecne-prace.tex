@@ -612,6 +612,23 @@ Balíček django-allauth bylo potřeba nainstalovat. Poté jsem musel udělat p�
 \subsection{Kontrola funkčnosti}
 Pro kontrolu funkčnosti jsem django-allauth musel přidat do cest urls.py a vytvořit jednoduchý pohled ve views.py, který vracel šablonu základní stránky.
 
+\newpage
+
+\section{Vlastní uživatelský model}
+\label{sec:vlastniuzivatelskymodel}
+Pro využití vlastního modelu uživatele jsem v models.py vytvořil model User, který vycházel z Django AbstractUser. Tomuto modelu jsem přiřadil email, uživatelské jméno a profilové foto, vše s patřičnými parametry. Model jsem nakonec musel zaregistrovat v admin.py aplikace a nastavit v settings.py.
+
+\section{Citlivá data}
+\label{sec:citlivadata}
+Dalším úkolem bylo aplikaci zdockerizovat. Před tím jsem se však musel postarat o citlivá data (klíče aplikací třetích stran a Djanga samotného). Tyto data jsem se ze souborů rozhodl skrýt a všechna umístit do jednoho souboru .env.
+
+\subsection{Python-decouple}
+Abych poté mohl k datům přistupovat nainstaloval jsem balíček python-decouple. Následně stačilo z balíčku importovat object config a citlivé proměnné nahradit config("název proměnné v souboru .env").
+
+\section{Dockerizace aplikace}
+\label{sec:dockerizaceaplikace}
+Aplikaci bylo potřeba zdockerizovat. Dockerfile, docker-compose
+
 \chapter{Výsledky řešení, uživatelský manuál}
 
 \chapter{Závěr}
