@@ -605,14 +605,18 @@ Prvním krokem bylo vytvoření projektu. Stačilo nainstalovat Python a framewo
 \section{Autentizace Django-allauth}
 \label{sec:autentizacedjango-allauth}
 Dále bylo mým úkolem umožnit uživatelům registraci a přihlášení pomocí aplikací třetích stran (GitHub a Microsoft). Pro tuto funkci jsem zvolil balíček django-allauth, který proces vytváření autentizace značně urychlil a autentizaci zabezpečil.
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.4\textwidth]{image/login.png}
+		\caption{Formulář přihlášení}
+		\label{fig:formularprihlaseni}
+	\end{figure}
 
 \subsection{Aplikace třetích stran}
 Balíček django-allauth bylo potřeba nainstalovat. Poté jsem musel udělat pár změn v settings.py. Pro funkčnost přihlášení aplikací třetích stran jsem musel tyto aplikace přidat do struktury SOCIALACCOUNT\_PROVIDERS. K tomu jsem potřeboval klíče těchto poskytovatelů, ty jsem získal zaregistrováním a nastavením aplikací OAuth.
 
 \subsection{Kontrola funkčnosti}
 Pro kontrolu funkčnosti jsem django-allauth musel přidat do cest urls.py a vytvořit jednoduchý pohled ve views.py, který vracel šablonu základní stránky.
-
-\newpage
 
 \section{Vlastní uživatelský model}
 \label{sec:vlastniuzivatelskymodel}
@@ -627,7 +631,35 @@ Abych poté mohl k datům přistupovat nainstaloval jsem balíček python-decoup
 
 \section{Dockerizace aplikace}
 \label{sec:dockerizaceaplikace}
-Aplikaci bylo potřeba zdockerizovat. Dockerfile, docker-compose
+Dockerizace je proces přizpůsobení a zapouzdření aplikace do kontejneru pomocí technologie Docker. Kontejner je samostatný a izolovaný balíček, který obsahuje veškeré potřebné souboru aplikace.
+\subsection{Docker Desktop}
+Jako první jsem si nainstaloval program Docker Desktop, který umožňuje práci s kontejnery v grafickém prostředí.
+\subsection{Docker Compose}
+Dále jsem také využil nástroj Docker Compose, díky nemuž jsem mohl definovat a spouštět více kontejnerů současně jako součást jedné aplikace. V mém případě to byl jeden kontejner s databází a jeden kontejner se samotnou aplikací.
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.7\textwidth]{image/kontejnery.png}
+		\caption{Docker kontejnery}
+		\label{fig:dockerkontejnery}
+	\end{figure}
+
+\section{Administrace}
+\label{sec:administrace}
+Pro administraci uživatelů jsem se rozhodl použít původní administraci Djanga a upravit si její vzhled podle mých preferencí.
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.7\textwidth]{image/administrace.png}
+		\caption{Administrace na adrese /admin}
+		\label{fig:administracesoftuidashboard}
+	\end{figure}
+\subsection{Šablona Soft UI Dashboard}
+K úpravě administrace jsem vybral šablonu vytvořenou pomocí Bootstrap 5 Soft UI Dashboard. Tuto technologii lze získat dvěma způsoby - stáhnutím souborů z GitHubu nebo nainstalováním balíčku django-admin-soft-dashboard. Rozhodl jsem se využít druhou možnost a balíček nainstaloval. 
+
+\section{Databáze PostgreSQL}
+\label{sec:databazepostgresql}
+Django v základním nastavení používá databázi SQLite, ta ale pro produkční účely není vhodná. Databázi SQLite jsem proto vyměnil za velice populární databázi PostgreSQL, která má dobrou podporu Djangem. Databázi jsem vytvořil a propojil s aplikací.
+\subsection{Docker entrypoint}
+Vytvoření souboru entrypoint.sh, který využívá Docker entrypoint přišelo vhod, protože tento soubor zkontroluje funkčnost databáze předtím, než se aplikace nastartuje.
 
 \chapter{Výsledky řešení, uživatelský manuál}
 
